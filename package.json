@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "cypress-ui": "npx cypress open",
-    "cypress-cli": "npx cypress run"
+    "cypress-ui": "concurrently \"npm run dev\" \"cypress open\"",
+    "cypress-cli": "concurrently \"npm run dev\" \"cypress run\""
   },
   "dependencies": {
     "cypress": "^13.17.0",
@@ -21,6 +21,7 @@
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
