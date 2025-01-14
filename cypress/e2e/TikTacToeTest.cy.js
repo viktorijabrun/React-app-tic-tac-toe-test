@@ -3,7 +3,7 @@ describe("Tic Tac Toe app", () => {
     cy.visit("http://localhost:5173/");
   });
 
-  describe("Initial state", () => {
+  describe("Elements should be visible", () => {
     it("Renders default elements on the screen", () => {
       //Ensure that title is visible
       cy.contains("h1", "Tic Tac Toe").should("be.visible");
@@ -14,8 +14,8 @@ describe("Tic Tac Toe app", () => {
         "[data-testid='status-message']",
         "Next Turn: X (You)"
       ).should("be.visible");
-      //Squares should be empty
-      cy.get(".cell").should("be.empty");
+      //Should be 9 cells and all of them should be empty
+      cy.get(".cell").should("have.length", 9).should("be.empty");
       //Reset button is visible
       cy.get('[data-testid="reset-button"]').should("be.visible");
     });
@@ -50,17 +50,22 @@ describe("Tic Tac Toe app", () => {
 
   describe("Winning and Tie conditions", () => {
     it("The games ends in victory", () => {
-      cy.get("[data-testid='cell-4']").click(); //Player X makes a move
-      //Player O (AI) makes a move
-      cy.wait(500);
-      //Player X makes a move
-      cy.get("[data-testid='cell-2']").click();
-      //Player O (AI) makes a move
-      cy.wait(500);
-      //Player X makes a move
-      cy.get("[data-testid='cell-1']").click();
+      const playerMove = () => {
+        cy.get('[data-testid^="cell"]').each(($cell, index) => {
+          if ($cell.text() === "") {
+            cy.wrap($cell).click();
+            return false;
+          }
+        });
+      };
 
-      //Verify that status message contains "Winner: "
+      // Simulate the game: Player moves, then AI moves, repeat
+      for (let i = 0; i < 5; i++) {
+        playerMove(); // Player's turn
+        cy.wait(500);
+      }
+
+      //Verify that status message contains "Winner: O"
       cy.contains("[data-testid='status-message']", "Winner: O").should(
         "be.visible"
       );
