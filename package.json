@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "cypress": "cypress run",
     "cypress-ui": "concurrently \"npm run dev\" \"cypress open\"",
     "cypress-cli": "concurrently \"npm run dev\" \"cypress run\""
   },
