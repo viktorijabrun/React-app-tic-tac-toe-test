@@ -15,7 +15,7 @@ This is a simple Tic Tac Toe game built with React, where a player competes agai
    https://github.com/viktorijabrun/React-app-tic-tac-toe-test.git
 2. Install dependencies:
    npm install
-3. Open cypress: npm run cypress-ui or run cypress in terminal: npm run cypress-cli
+3. Open cypress: `npm run cypress-ui` or run cypress in terminal: `npm run cypress-cli`
 
 ## 🧪 Testing Overview
 
