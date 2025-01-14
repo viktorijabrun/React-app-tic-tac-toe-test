@@ -1,6 +1,6 @@
 # 🤖 Tic Tac Toe with AI
 
-This is a simple Tic Tac Toe game built with React, where a player competes against an AI opponent. Below is the detailed documentation of instructions how to use repository, known issues encountered during testing and test cases.
+This is a simple Tic Tac Toe game built with React, where a player competes against an AI opponent. Below is the detailed documentation of instructions how to use repository and key test scenarios.
 
 ## 🔍 Features:
 
@@ -15,12 +15,22 @@ This is a simple Tic Tac Toe game built with React, where a player competes agai
    https://github.com/viktorijabrun/React-app-tic-tac-toe-test.git
 2. Install dependencies:
    npm install
-3. Run the React app:
-   npm run dev
-4. Ensure the app is running on http://localhost:5173.
-5. Open second terminal, open cypress:
-   npm run cypress-ui
+3. Open cypress: npm run cypress-ui or run cypress in terminal: npm run cypress-cli
 
-## 🚨Known Issues
+## 🧪 Testing Overview
 
-## 📄Test cases
+The project includes End-to-End (E2E) tests written with Cypress to ensure reliable functionality.
+
+Key Test Scenarios:
+
+- Initial State: Verify the board loads with 9 empty cells.
+- Player vs AI Gameplay:
+  - Player can make moves, and the AI responds dynamically.
+  - AI blocks winning moves and tries to win when possible.
+- Winning Scenarios: Ensure the game detects winners correctly for both the player and AI.
+- Tie Scenarios: Ensure the game detects a tie when the board is full without a winner.
+- Reset Functionality: Verify the board and game state reset correctly.
+
+## Cypress Test Execution for Tic Tac Toe Project
+
+![Cypress Test Execution](./screenshots/cypress-screen-shot.png)

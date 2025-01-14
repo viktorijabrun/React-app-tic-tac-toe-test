@@ -7,15 +7,19 @@ describe("Tic Tac Toe app", () => {
     it("Renders default elements on the screen", () => {
       //Ensure that title is visible
       cy.contains("h1", "Tic Tac Toe").should("be.visible");
+
       //Game board should be visible
       cy.get("[data-testid='board']").should("be.visible");
+
       //Ensure that status message is visible and player X starts first
       cy.contains(
         "[data-testid='status-message']",
         "Next Turn: X (You)"
       ).should("be.visible");
+
       //Should be 9 cells and all of them should be empty
       cy.get(".cell").should("have.length", 9).should("be.empty");
+
       //Reset button is visible
       cy.get('[data-testid="reset-button"]').should("be.visible");
     });
@@ -25,10 +29,13 @@ describe("Tic Tac Toe app", () => {
     it("Ensure a cell cannot be clicked twice", () => {
       // Make a move
       cy.get("[data-testid='cell-0']").click();
+
       //AI move
       cy.wait(500);
+
       // Click on the same cell, check if cell is not empty
       cy.get("[data-testid='cell-0']").click().should("contain", "X");
+
       //Status message
       cy.contains(
         "[data-testid='status-message']",
@@ -41,6 +48,7 @@ describe("Tic Tac Toe app", () => {
     it("Verify the AI takes its turn after the player", () => {
       // Make a move
       cy.get("[data-testid='cell-0']").click();
+
       //Status message is correct:"Next Turn: O (AI)".
       cy.contains("[data-testid='status-message']", "Next Turn: O (AI)").should(
         "be.visible"
@@ -48,8 +56,9 @@ describe("Tic Tac Toe app", () => {
     });
   });
 
-  describe("Winning and Tie conditions", () => {
+  describe("Gameplay scenarios", () => {
     it("The games ends in victory", () => {
+      //Player takes first empty cell
       const playerMove = () => {
         cy.get('[data-testid^="cell"]').each(($cell, index) => {
           if ($cell.text() === "") {
@@ -72,21 +81,30 @@ describe("Tic Tac Toe app", () => {
     });
 
     it("The game ends in a draw.", () => {
-      cy.get("[data-testid='cell-4']").click(); //Player X makes a move
+      //Player X makes a move
+      cy.get("[data-testid='cell-4']").click();
+
       //Player O (AI) makes a move
       cy.wait(500);
+
       //Player X makes a move
       cy.get("[data-testid='cell-2']").click();
+
       //Player O (AI) makes a move
       cy.wait(500);
+
       //Player X makes a move
       cy.get("[data-testid='cell-3']").click();
+
       //Player O (AI) makes a move
       cy.wait(500);
+
       //Player X makes a move
       cy.get("[data-testid='cell-7']").click();
+
       //Player O (AI) makes a move
       cy.wait(500);
+
       //Player X makes a move
       cy.get("[data-testid='cell-8']").click();
 
@@ -101,12 +119,16 @@ describe("Tic Tac Toe app", () => {
     it("Should reset game and status message", () => {
       //Make a move
       cy.get("[data-testid='cell-2']").click();
+
       //AI makes a move
       cy.wait(500);
+
       // Press "Reset Game" button
       cy.get('[data-testid="reset-button"]').click();
+
       //Verify that board squares is empty
       cy.get(".cell").should("be.empty");
+
       //Ensure that status message is visible and player X starts first
       cy.contains(
         "[data-testid='status-message']",
